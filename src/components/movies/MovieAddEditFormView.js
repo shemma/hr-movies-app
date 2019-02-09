@@ -122,7 +122,7 @@ class MovieAddEditFormView extends Component {
 		const movieObject = {
 			Director: values.director,
 			Genre: values.genre,
-			Runtime: values.runTime + 'min',
+			Runtime: values.runTime + ' min',
 			Title: values.title,
 			Year: (new Date(values.released).getFullYear()),
 		};
@@ -144,7 +144,7 @@ function validate(values) {
 	if (!values.title || values.title.length < 3) {
 		errors.title = "Enter a title that is at least 3 characters!";
 	}
-	if (!values.runTime || values.runTime.length > 3) {
+	if (!values.runTime) {
 		errors.runTime = "Please populate valid Run Time";
 	}
 	if (!values.genre) {
