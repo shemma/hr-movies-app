@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 npm install
 ```
 
-2. Start he-movies-app application
+2. Start hr-movies-app application
 
 ```sh
 npm start

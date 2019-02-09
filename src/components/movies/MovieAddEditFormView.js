@@ -122,7 +122,7 @@ class MovieAddEditFormView extends Component {
 		const movieObject = {
 			Director: values.director,
 			Genre: values.genre,
-			Runtime: values.runTime,
+			Runtime: values.runTime + 'min',
 			Title: values.title,
 			Year: (new Date(values.released).getFullYear()),
 		};
