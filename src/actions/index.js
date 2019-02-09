@@ -1,27 +1,27 @@
 import axios from 'axios';
 
-import { FETCH_MOVIES, UPDATE_MOVIE, DELETE_MOVIE, ADD_MOVIE } from './types';
+import { FETCH_MOVIES, UPDATE_MOVIE, DELETE_MOVIE, ADD_MOVIE, CLEAR_MOVIES } from './types';
 
 const baseUrl = 'https://www.omdbapi.com/';
 const apiKey = '&type=movie&apikey=a34526ae';
 
-export const fetchMoviesList = searchTerm => async dispatch => {
-	const searchUrl = baseUrl + `?s=${searchTerm}` + apiKey;
+export const fetchMoviesList = (searchTerm, page) => async dispatch => {
+	const searchUrl = baseUrl + `?s=${searchTerm}` + apiKey + `&page=${page}`;
 	const res = await axios.get(searchUrl);
 
 	if (res.data.Response === 'True') {
-		fetchMoviesListInformation(res.data.Search, dispatch);
+		fetchMoviesListInformation(res.data, searchTerm, page, dispatch);
 	} else {
-		dispatch({ type: FETCH_MOVIES, payload: res.data });
+		dispatch({ type: FETCH_MOVIES, payload: {...res.data , searchTerm} });
 	}
 };
 
-const fetchMoviesListInformation = (moviesList, dispatch) => {
+const fetchMoviesListInformation = ({Search, totalResults, Response}, searchTerm, page, dispatch) => {
 	let promises = [];
 
 	try {
-		for (let i = 0; i < moviesList.length; i++) {
-			const getMovieByIDUrl = baseUrl + `?i=${moviesList[i].imdbID}` + apiKey;
+		for (let i = 0; i < Search.length; i++) {
+			const getMovieByIDUrl = baseUrl + `?i=${Search[i].imdbID}` + apiKey;
 			promises.push(axios.get(getMovieByIDUrl));
 		}
 	
@@ -35,7 +35,7 @@ const fetchMoviesListInformation = (moviesList, dispatch) => {
 					return null;
 				});
 	
-				dispatch({ type: FETCH_MOVIES, payload: {Search: fullDetailedMoviesList, Response: "True"} });
+				dispatch({ type: FETCH_MOVIES, payload: {Search: fullDetailedMoviesList, totalResults, searchTerm, page, Response} });
 			}));
 	} catch(err) {
 		console.log(err);
@@ -56,4 +56,9 @@ export const updateMovie = (movie) => async dispatch => {
 export const deleteMovie = (movie) => async dispatch => {
 
 	dispatch({ type: DELETE_MOVIE, payload: movie });
+};
+
+export const clearMovies = () => async dispatch => {
+
+	dispatch({ type: CLEAR_MOVIES });
 };

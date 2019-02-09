@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import MovieAddEditModalView from './MovieAddEditModalView';
 import MovieDeleteModalView from './MovieDeleteModalView';
+import messages from '../i18n/App.i18n.es';
 
 import noImage from '../../css/image/noImage.jpg';
 
@@ -46,26 +47,26 @@ class MovieItem extends Component {
     }
 
     render() {
-        const {movie, deleteMovie} = this.props;
+        const {movie, deleteMovie, T} = this.props;
 
         return (
             <div className='card-item'>
                 <Card>
-                    <Card.Img variant="top" src={movie.Poster !== 'N/A' ? movie.Poster : noImage} alt='' style={{height: '18rem', width: '100%'}}/>
+                    <Card.Img variant="top" src={movie.Poster !== 'N/A' ? movie.Poster : noImage} alt='' />
                     <Card.Body className='card-title'>
                         <Card.Title>{this.transformTitleString(movie.Title)}</Card.Title>
                     </Card.Body>
                     <ListGroup className="list-group-flush">
                         <ListGroupItem className="card-group-item">
-                            <p><strong>Year</strong>: {movie.Year}</p>
-                            <p><strong>Runtime</strong>: {movie.Runtime}</p>
-                            <p><strong>Genre</strong>: {movie.Genre}</p>
-                            <p><strong>Director</strong>: {movie.Director}</p>
+                            <p><strong>{T(messages.year)}</strong>: {movie.Year}</p>
+                            <p><strong>{T(messages.runtime)}</strong>: {movie.Runtime}</p>
+                            <p><strong>{T(messages.genre)}</strong>: {movie.Genre}</p>
+                            <p><strong>{T(messages.director)}</strong>: {movie.Director}</p>
                         </ListGroupItem>
                     </ListGroup>
                     <Card.Body>
-                        <Button variant="outline-primary" onClick={this.handleShowEditModal}>Edit movie</Button>
-                        <Button variant="outline-danger" className="float-right" onClick={this.handleShowDeleteModal}>Delete</Button>
+                        <Button variant="outline-primary" onClick={this.handleShowEditModal}>{T(messages.editMovieBtn)}</Button>
+                        <Button variant="outline-danger" className="float-right" onClick={this.handleShowDeleteModal}>{T(messages.deleteMovieBtn)}</Button>
                     </Card.Body>
                     <MovieAddEditModalView
                         show={this.state.editModalShow}
@@ -78,6 +79,7 @@ class MovieItem extends Component {
                         onHide={this.handleCloseDeleteModal}
                         movie={movie}
                         deleteMovie={deleteMovie}
+                        T={T}
                     />
                 </Card>
             </div>

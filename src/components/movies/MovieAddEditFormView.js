@@ -142,21 +142,21 @@ function validate(values) {
 	const errors = {};
 
 	if (!values.title || values.title.length < 3) {
-	errors.title = "Enter a title that is at least 3 characters!";
+		errors.title = "Enter a title that is at least 3 characters!";
 	}
 	if (!values.runTime || values.runTime.length > 3) {
-	errors.runTime = "Please populate valid Run Time";
+		errors.runTime = "Please populate valid Run Time";
 	}
 	if (!values.genre) {
-	errors.genre = "Please populate Genre";
+		errors.genre = "Please populate Genre";
 	}
 	if (!values.director) {
-	errors.director = "Please populate Director";
+		errors.director = "Please populate Director";
 	}
 
 	const releasedDate = new Date(values.released);
 	if (!values.released || (Object.prototype.toString.call(releasedDate) === "[object Date]" && isNaN(releasedDate.getTime()))) {
-		errors.released = "Please populate date";
+		errors.released = "Please populate Year";
 	}
 
 	return errors;

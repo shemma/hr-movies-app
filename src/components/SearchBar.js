@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
-import { fetchMoviesList } from '../actions';
+import { fetchMoviesList, clearMovies } from '../actions';
+import messages from './i18n/App.i18n.es';
 
 import '../css/searchBar.scss';
 
@@ -17,31 +18,32 @@ class SearchBar extends Component {
 	}
 
 	componentWillMount() {
-		const initialSearchParam = 'Rings';
-		this.props.fetchMoviesList(initialSearchParam);
+		this.props.fetchMoviesList(this.props.searchTerm, 1);
 	}
 
 	onSearchTermSubmit(searchTerm) {
 		if (searchTerm.length > 0) {
+			this.props.clearMovies();
 			this.props.fetchMoviesList(searchTerm);
 		}
 	}
 
 	render() {
 		const {searchTerm} = this.state;
+		const {T} = this.props;
 
 		return (
 		<div id='searchBar'>
 			<InputGroup className="mb-3">
 				<FormControl
-					placeholder="Search Movie..."
+					placeholder={T(messages.searchInputText)}
 					size="lg"
 					value={searchTerm}
 					onChange={(e) => this.setState({searchTerm: e.target.value})}
 				/>
 				<InputGroup.Append>
 					<Button className='search-btn' variant="outline-secondary" onClick={() => this.onSearchTermSubmit(searchTerm)}>
-					<i className="fas fa-search" style={{marginRight: '10px'}}/><span>Search</span>
+					<i className="fas fa-search" /><span>{T(messages.searchBtn)}</span>
 					</Button>
 				</InputGroup.Append>
 			</InputGroup>
@@ -50,7 +52,8 @@ class SearchBar extends Component {
 	}
 }
 
-export default connect(
-	null,
-	{ fetchMoviesList }
-)(SearchBar);
+function mapStateToProps({ movies }) {
+    return { searchTerm: movies.searchTerm };
+}
+
+export default connect(mapStateToProps,{ fetchMoviesList, clearMovies })(SearchBar);

@@ -27,9 +27,25 @@
                     margin: 0;
                 }
             }
+
+            img {
+                height: 18rem;
+            }
         }
     }
 
+    .add-movie {
+        padding: 1rem;
+        
+        i {
+            margin-right: 10px;
+        }
+    }
+
+    .loader {
+        margin: 1rem;
+        text-align: center;
+    }
 }
 
 .react-datepicker__input-container {

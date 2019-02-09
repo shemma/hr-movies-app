@@ -16,4 +16,8 @@ npm start
 
 ## Additional information
 
-- Application is written with React & Redux
+- Application is written with React & Redux.
+- Bootstrap
+- Deployed in [Heroku](https://hr-movies-app.herokuapp.com/).
+- Locale implemented with React intl
+- Movies list implemented with Infinity Scroll (Scroll to fetch more results)

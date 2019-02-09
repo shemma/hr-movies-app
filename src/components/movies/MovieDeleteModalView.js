@@ -1,7 +1,8 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import messages from '../i18n/App.i18n.es';
 
-const MovieDeleteModalView = ({movie, onHide, show, deleteMovie}) => {
+const MovieDeleteModalView = ({movie, onHide, show, deleteMovie, T}) => {
 	function onDeleteMovie() {
 		deleteMovie(movie);
 		onHide();
@@ -23,8 +24,8 @@ const MovieDeleteModalView = ({movie, onHide, show, deleteMovie}) => {
 				<p>You are about to <strong>Delete</strong> this movie.</p>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button variant="secondary" onClick={onHide}>Cancel</Button>
-				<Button variant="primary" onClick={onDeleteMovie}>Accept</Button>
+				<Button variant="secondary" onClick={onHide}>{T(messages.deleteModalCancel)}</Button>
+				<Button variant="primary" onClick={onDeleteMovie}>{T(messages.deleteModalAccept)}</Button>
 			</Modal.Footer>
 		</Modal>
 	);
