@@ -34,13 +34,15 @@ class SearchBar extends Component {
 		<div id='searchBar'>
 			<InputGroup className="mb-3">
 				<FormControl
-					placeholder="Movie Name...(init search Rings)"
+					placeholder="Search Movie..."
 					size="lg"
 					value={searchTerm}
 					onChange={(e) => this.setState({searchTerm: e.target.value})}
 				/>
 				<InputGroup.Append>
-					<Button variant="outline-secondary" onClick={() => this.onSearchTermSubmit(searchTerm)}>Search Movies</Button>
+					<Button className='search-btn' variant="outline-secondary" onClick={() => this.onSearchTermSubmit(searchTerm)}>
+					<i className="fas fa-search" style={{marginRight: '10px'}}/><span>Search</span>
+					</Button>
 				</InputGroup.Append>
 			</InputGroup>
 		</div>

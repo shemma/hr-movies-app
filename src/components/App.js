@@ -7,12 +7,16 @@ import MoviesMainView from './movies/MoviesMainView';
 
 class App extends Component {
   render() {
+
     return (
-      <Container>
+      <React.Fragment>
         <Header />
-        <SearchBar />
-        <MoviesMainView />
-      </Container>
+        <Container>
+          <SearchBar />
+          <MoviesMainView />
+        </Container>
+      </React.Fragment>
+
     );
   }
 }

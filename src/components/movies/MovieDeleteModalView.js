@@ -20,7 +20,7 @@ const MovieDeleteModalView = ({movie, onHide, show, deleteMovie}) => {
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<p>You are about to <strong>delete</strong> this movie.</p>
+				<p>You are about to <strong>Delete</strong> this movie.</p>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={onHide}>Cancel</Button>

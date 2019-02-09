@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-import { FETCH_MOVIES, UPDATE_MOVIE, DELETE_MOVIE } from './types';
+import { FETCH_MOVIES, UPDATE_MOVIE, DELETE_MOVIE, ADD_MOVIE } from './types';
 
 const baseUrl = 'https://www.omdbapi.com/';
-const apiKey = '&apikey=a34526ae';
+const apiKey = '&type=movie&apikey=a34526ae';
 
 export const fetchMoviesList = searchTerm => async dispatch => {
-	const searchString = baseUrl + `?s=${searchTerm}` + apiKey;
-	const res = await axios.get(searchString);
+	const searchUrl = baseUrl + `?s=${searchTerm}` + apiKey;
+	const res = await axios.get(searchUrl);
 
 	if (res.data.Response === 'True') {
 		fetchMoviesListInformation(res.data.Search, dispatch);
@@ -21,8 +21,8 @@ const fetchMoviesListInformation = (moviesList, dispatch) => {
 
 	try {
 		for (let i = 0; i < moviesList.length; i++) {
-			const getMovieByIDString = baseUrl + `?i=${moviesList[i].imdbID}` + apiKey;
-			promises.push(axios.get(getMovieByIDString));
+			const getMovieByIDUrl = baseUrl + `?i=${moviesList[i].imdbID}` + apiKey;
+			promises.push(axios.get(getMovieByIDUrl));
 		}
 	
 		axios.all(promises)
@@ -41,6 +41,11 @@ const fetchMoviesListInformation = (moviesList, dispatch) => {
 		console.log(err);
 	}
 
+};
+
+export const addMovie = (movie) => async dispatch => {
+
+	dispatch({ type: ADD_MOVIE, payload: movie });
 };
 
 export const updateMovie = (movie) => async dispatch => {

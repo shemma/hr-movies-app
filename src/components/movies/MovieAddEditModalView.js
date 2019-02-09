@@ -1,8 +1,10 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import MovieEditFormView from './MovieEditFormView';
+import MovieAddEditFormView from './MovieAddEditFormView';
 
-const MovieEditModalView = ({movie, onHide, show}) => {
+const MovieAddEditModalView = ({movie, scope, onHide, show}) => {
+    const title = movie ? movie.Title : 'Add New Movie';
+
     return (
       <Modal
         show={show}
@@ -13,14 +15,14 @@ const MovieEditModalView = ({movie, onHide, show}) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Edit: {movie.Title}
+            {title}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <MovieEditFormView onHide={onHide} selectedMovie={movie} />
+          <MovieAddEditFormView onHide={onHide} selectedMovie={movie} scope={scope} />
         </Modal.Body>
       </Modal>
     );
 }
 
-export default MovieEditModalView;
+export default MovieAddEditModalView;

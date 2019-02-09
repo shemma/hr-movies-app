@@ -1,0 +1,46 @@
+#movies {
+    .movie-card-container {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        flex-grow: 1;
+
+        .card-item {
+            width: 18rem;
+            margin: 1rem;
+
+            .card-title {
+                font-size: 1.1rem;
+                height: 5rem;
+            }
+
+            .card-group-item {
+                height: 9rem;
+                font-size: 13px;
+        
+                strong {
+                    font-size: 17px;
+                    font-family: serif;
+                }
+        
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+}
+
+.react-datepicker__input-container {
+    width: 100%;
+} 
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+.text-danger { 
+    font-size: 13px;
+    font-weight: 600;
+}

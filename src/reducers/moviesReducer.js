@@ -1,29 +1,27 @@
-import { FETCH_MOVIES, UPDATE_MOVIE, DELETE_MOVIE } from '../actions/types';
+import { FETCH_MOVIES, UPDATE_MOVIE, DELETE_MOVIE, ADD_MOVIE } from '../actions/types';
 
 const initialState = {};
 
 export default function(state = initialState, action) {
-	let newState = { ...state };
 	switch (action.type) {
 		case FETCH_MOVIES:
-			return { ...newState, ...action.payload };
+			return { ...state, ...action.payload };
+		case ADD_MOVIE:
+			state.Search.push(action.payload);
+			return { ...state};
 		case UPDATE_MOVIE:
-			const updatedMoviesArray = newState.Search.map(movie => {
+			const updatedMoviesArray = state.Search.map(movie => {
 				if (movie.imdbID === action.payload.id) {
-					movie.Director = action.payload.director;
-					movie.Genre = action.payload.genre;
-					movie.Runtime = action.payload.runTime;
-					movie.Title = action.payload.title;
-					movie.Year = action.payload.year;
+					movie = {...movie, ...action.payload};
 				}
 
 				return movie;
 			});
-			return { ...newState, Search: updatedMoviesArray };
+			return { ...state, Search: updatedMoviesArray };
 		case DELETE_MOVIE:
-			const newMoviesArray = newState.Search.filter(movie => movie.imdbID !== action.payload.imdbID);
-			return { ...newState, Search: newMoviesArray };
+			const newMoviesArray = state.Search.filter(movie => movie.imdbID !== action.payload.imdbID);
+			return { ...state, Search: newMoviesArray };
 		default:
-			return newState;
+			return state;
 	}
 }
